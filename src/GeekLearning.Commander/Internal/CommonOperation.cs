@@ -30,7 +30,7 @@ namespace GeekLearning.Commander.Internal
 
         public async Task InvokeAsync()
         {
-            if (IsEnabled)
+            if (IsEnabled && !IsRunning)
             {
                 this.IsRunning = true;
                 base.OnStateChanged(new OperationState(this));
