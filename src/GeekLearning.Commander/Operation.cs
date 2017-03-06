@@ -41,5 +41,10 @@ namespace GeekLearning.Commander
             return new Internal.CommandOperationWrapper(operation, onSwallowedException);
         }
 
+        public static IOperation Wrap(this IOperation operation, Func<Task> prefix = null, Func<Task> suffix = null)
+        {
+            return new Internal.PostPrefixOperationWrapper(operation, prefix, suffix);
+        }
+
     }
 }
