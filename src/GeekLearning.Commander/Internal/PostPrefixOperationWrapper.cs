@@ -17,9 +17,9 @@ namespace GeekLearning.Commander.Internal
             this.suffix = suffix;
         }
 
-        public bool CanRun => this.IsEnabled && !this.IsRunning;
+        public bool CanRun => this.IsEnabled && !this.innerOperation.IsRunning && !this.IsRunning;
 
-        public bool IsEnabled => true;
+        public bool IsEnabled => this.innerOperation.IsEnabled;
 
         private volatile bool isRunning;
         private Func<Task> prefix;
@@ -62,6 +62,7 @@ namespace GeekLearning.Commander.Internal
 
         public void OnNext(OperationState value)
         {
+            base.OnStateChanged(new OperationState(this));
         }
     }
 }
