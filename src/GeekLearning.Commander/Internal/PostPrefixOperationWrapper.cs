@@ -40,9 +40,17 @@ namespace GeekLearning.Commander.Internal
                 base.OnStateChanged(new OperationState(this));
                 try
                 {
-                    await this.prefix?.Invoke();
+                    if (this.prefix != null) 
+                    {
+                        await this.prefix.Invoke();
+                    }
+                    
                     await this.innerOperation.InvokeAsync();
-                    await this.suffix?.Invoke();
+                    
+                    if (this.suffix != null)
+                    {
+                        await this.suffix.Invoke();
+                    }
                 }
                 finally
                 {
